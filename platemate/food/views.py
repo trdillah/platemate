@@ -175,10 +175,15 @@ def photo_summary(request, photo_id):
             total['fat'] += i['fat']
             total['carbohydrate'] += i['carbohydrate']
             total['protein'] += i['protein']
+    for bg in box_group:
+        for b in bg:
+            if b.id == ingredient_boxes[0]['id']:
+                valid_box_group = bg
+                break
     c = {
         'ingredient_boxes': ingredient_boxes,
         'total': total,
-        'box_group': box_group[0]
+        'box_group': valid_box_group
     }
     return render_to_response("fe/food_summary.html", c)
 
